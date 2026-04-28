@@ -1,0 +1,65 @@
+<div class="container">
+
+  <h1 class="text-center my-4">Rick and Morty karakterek</h1>
+
+  <!-- PAGINATION -->
+  <div class="d-flex justify-content-center align-items-center gap-3 mb-4">
+
+    <button 
+      class="btn btn-primary"
+      (click)="previousPage()"
+      [disabled]="currentPage() === 1">
+      Előző oldal
+    </button>
+
+    <span class="fw-bold">
+      Aktuális oldal: {{ currentPage() }}
+    </span>
+
+    <button 
+      class="btn btn-primary"
+      (click)="nextPage()">
+      Következő oldal
+    </button>
+
+  </div>
+  <div class="mb-4 text-center">
+  <input 
+    type="text" 
+    class="form-control w-50 mx-auto"
+    placeholder="Keresés név alapján..."
+    (input)="search.set($any($event.target).value)"
+  >
+</div>
+  <!-- KARAKTEREK -->
+  <div class="row">
+
+   @for (character of characters().filter(c => c.name.toLowerCase().includes(search().toLowerCase())); track character.id) {
+
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm text-center p-3">
+
+          <img 
+            [src]="character.image" 
+            class="card-img-top mb-3 rounded">
+
+          <h5 class="card-title">
+            {{ character.name }}
+          </h5>
+
+          <p>
+            <strong>Faj:</strong> {{ character.species }}
+          </p>
+
+          <p>
+            <strong>Állapot:</strong> {{ character.status }}
+          </p>
+
+        </div>
+      </div>
+
+    }
+
+  </div>
+
+</div>

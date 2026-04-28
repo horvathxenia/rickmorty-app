@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kód letöltése
+        uses: actions/checkout@v3
+
+      - name: Node telepítése
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Függőségek telepítése
+        run: npm install
+
+      - name: Build
+        run: npm run build
